@@ -1,0 +1,46 @@
+{ 
+    
+    "object": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   118, 120  ,  137, 84  ,  143, 84  ,  143, 120  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   121, 31  ,  106, 130  ,  98, 134  ,  58, 10  ,  58, 4  ,  121, 4  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   137, 84  ,  118, 120  ,  106, 130  ,  121, 31  ,  129, 40  ,  136, 57  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   12, 99  ,  8, 85  ,  8, 62  ,  12, 48  ,  24, 31  ,  47, 134  ,  24, 116  ,  16, 107  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   24, 31  ,  12, 48  ,  16, 40  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   24, 116  ,  47, 134  ,  33, 126  ,  24, 118  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   33, 21  ,  47, 13  ,  58, 10  ,  98, 134  ,  56, 137  ,  47, 134  ,  24, 31  ,  24, 29  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   56, 137  ,  98, 134  ,  84, 138  ]
+        }
+    ]
+}

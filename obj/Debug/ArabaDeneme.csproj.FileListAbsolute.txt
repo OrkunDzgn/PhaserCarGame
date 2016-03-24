@@ -1,0 +1,6 @@
+C:\Users\Orkun\Desktop\Game Dev\Araba Deneme\ArabaDeneme\bin\ArabaDeneme.dll.config
+C:\Users\Orkun\Desktop\Game Dev\Araba Deneme\ArabaDeneme\bin\ArabaDeneme.dll
+C:\Users\Orkun\Desktop\Game Dev\Araba Deneme\ArabaDeneme\bin\ArabaDeneme.pdb
+C:\Users\Orkun\Desktop\Game Dev\Araba Deneme\ArabaDeneme\obj\Debug\ArabaDeneme.csprojResolveAssemblyReference.cache
+C:\Users\Orkun\Desktop\Game Dev\Araba Deneme\ArabaDeneme\obj\Debug\ArabaDeneme.dll
+C:\Users\Orkun\Desktop\Game Dev\Araba Deneme\ArabaDeneme\obj\Debug\ArabaDeneme.pdb
