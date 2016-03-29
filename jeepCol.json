@@ -1,0 +1,21 @@
+{ 
+    
+    "body": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   60, 80.5  ,  153.5, 29  ,  171, 25.5  ,  183, 30.5  ,  184.5, 73  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   1, 0.5  ,  2, 0.5  ,  153.5, 29  ,  60, 80.5  ,  18, 72.5  ,  1, 55.5  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   153.5, 29  ,  2, 0.5  ,  116, 5.5  ]
+        }
+    ]
+}

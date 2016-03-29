@@ -1,0 +1,21 @@
+{ 
+    
+    "smallWheel": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   12, 34.5  ,  8, 32.5  ,  16, 0.5  ,  31.5, 7  ,  34.5, 13  ,  34.5, 23  ,  30.5, 30  ,  24, 34.5  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   0.5, 14  ,  2.5, 9  ,  9, 2.5  ,  15, 0.5  ,  16, 0.5  ,  8, 32.5  ,  3.5, 28  ,  0.5, 22  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   28, 3.5  ,  31.5, 7  ,  16, 0.5  ,  21, 0.5  ]
+        }
+    ]
+}
