@@ -18,6 +18,9 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="images\carparts\arka_lastik.png" />
+    <Content Include="images\carparts\body.png" />
+    <Content Include="images\carparts\on_lastik.png" />
     <Content Include="images\map1.png" />
     <Content Include="images\object.png" />
     <Content Include="index.html" />
@@ -29,6 +32,7 @@
     <Content Include="road.json" />
     <Content Include="object.json" />
     <Content Include="road2.json" />
+    <Content Include="jeep_body.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

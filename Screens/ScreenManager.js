@@ -1,7 +1,7 @@
 ﻿
 var gameWidth = 1000;
 var gameHeight = 600;
-var backgroundColor = "#000000";
+var backgroundColor = "#00000";
 var rotationWheel;
 var maxSpeed;
 
@@ -13,16 +13,17 @@ function preload() {
     // load the sprite texture
     game.load.image('road1', 'images/map1.png');
     game.load.image('road2', 'images/map2.png');
-    game.load.image('objTest', 'images/object.png');
+    game.load.image('carBody', 'images/carparts/body.png');
 
     // load the physics data json
     game.load.physics('physicsData', 'road.json');
     game.load.physics('physicsData2', 'road2.json');
-    game.load.physics('objPhysicsData', 'object.json')
+    game.load.physics('carBodyPhysics', 'jeep_body.json')
 }
 
 var polygonCollisionSprite;
 var objColSprite;
+var cursors;
 
 function create() {
 
@@ -43,7 +44,7 @@ function create() {
     // add our polygon collider sprite
     // and give it physics
     polygonCollisionSprite = game.add.sprite(1600, 320, 'road2');
-    objColSprite = game.add.sprite(0, 0, 'objTest');
+    objColSprite = game.add.sprite(0, 0, 'carBody');
     
 
     game.physics.p2.enable([polygonCollisionSprite, objColSprite], false);
@@ -56,7 +57,7 @@ function create() {
 
     // load our polygon physics data
     polygonCollisionSprite.body.loadPolygon('physicsData2', 'map2');
-    objColSprite.body.loadPolygon('objPhysicsData', 'object');
+    objColSprite.body.loadPolygon('carBodyPhysics', 'body');
 
     objColSprite.body.data.gravityScale = 1,3;
     polygonCollisionSprite.body.static = true;
