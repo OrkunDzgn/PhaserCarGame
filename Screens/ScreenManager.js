@@ -32,9 +32,10 @@ var cursors;
 var motor_pickup;
 var textStyle;
 var text;
-//var pickups;
+var pickups;
+var pickupCount = 5;
 
-
+var previousXArr = [0, 0, 0, 0, 0];
 
 function create() {
 
@@ -53,8 +54,18 @@ function create() {
 
     game.physics.p2.updateBoundsCollisionGroup();
 
-    motor_pickup = game.add.sprite(500, 260, 'motor_pickup');
-    motor_pickup2 = game.add.sprite(1240, 310, 'motor_pickup');
+    pickups = game.add.group();
+    for (var i = 0; i < pickupCount; i++) {
+        var pickupX = getRandomX();
+        var pickupY = getRandomY();
+
+        console.log("Random X: " + pickupX + " Random Y: " + pickupY, i);
+        motor_pickup = pickups.create(pickupX, 300, 'motor_pickup');
+        game.physics.p2.enable(motor_pickup);
+        motor_pickup.body.static = true;
+    }
+    console.log(previousXArr[0] + " " + previousXArr[1] + " " + previousXArr[2] + " " + previousXArr[3]);
+
 
     polygonCollisionSprite = game.add.sprite(1600, 320, 'map3');
     game.physics.p2.enable(polygonCollisionSprite, false);
@@ -62,16 +73,6 @@ function create() {
     wheelFrontSprite = game.add.sprite(150, 350, 'wheel');
     wheelBackSprite = game.add.sprite(150, 350, 'wheel');
 
-    //pickups = game.add.group();
-    //for (var i = 0; i < enemycount; i++) {
-    //    var bullet = enemies.create(Math.random() * game.world.width, Math.random() * game.world.height - 140, 'bulletup'); //create bullet at the right side of the camera view
-    //    bullet.health = 10;  // health points..  bullets get only moved by moveAliveEnemy() when with full health
-    //    game.physics.p2.enable(bullet, true);
-    //    bullet.name = 'bullet';
-    //    bullet.body.setCircle(bulletdiameter);
-    //}
-
-    
 
     //wheelBackSprite.body.restitution = 0;
 
@@ -80,7 +81,7 @@ function create() {
     game.physics.p2.enable(carBodySprite);
     game.physics.p2.enable(wheelFrontSprite);
     game.physics.p2.enable(wheelBackSprite);
-    game.physics.p2.enable(motor_pickup);
+   // game.physics.p2.enable(motor_pickup);
 
 
     //var constraint = game.physics.p2.createLockConstraint(carBodySprite, wheelSprite, [45, -52], 0);
@@ -113,8 +114,6 @@ function create() {
     wheelFrontSprite.body.loadPolygon('wheelPhysics', 'smallWheel');
     wheelBackSprite.body.loadPolygon('wheelPhysics', 'smallWheel');
 
-    motor_pickup.body.static = true;
-
 
     carBodySprite.body.data.gravityScale = 1,3;
     polygonCollisionSprite.body.static = true;
@@ -145,11 +144,12 @@ function create() {
 
 function update() {
     //console.log("carBody X: " + carBodySprite.body.x + "pickup X: " + motor_pickup.x);
-    console.log("carBody X: " + carBodySprite.body.x + "carBody Y: " + carBodySprite.body.y);
-    checkOverlapManually(motor_pickup);
+    //console.log("carBody X: " + carBodySprite.body.x + "carBody Y: " + carBodySprite.body.y);
+
+    pickups.forEachAlive(checkOverlapManually, this);
 
     if (cursors.up.isDown) {
-        if (wheelBackSprite.body.angularVelocity < 40 || wheelFrontSprite.body.angularVelocity < 40 || carBodySprite.body.velocity.x < 500) {
+        if (wheelBackSprite.body.angularVelocity < 40 || wheelFrontSprite.body.angularVelocity < 40 || carBodySprite.body.velocity.x < 450) {
             wheelBackSprite.body.angularVelocity =+ 8;
             wheelFrontSprite.body.angularVelocity =+ 8;
             carBodySprite.body.velocity.x += 5;
@@ -170,25 +170,55 @@ function update() {
 }
 
 function checkOverlapManually(pickupObj) {
-    //for (var i = 0 ; i < pickupObjects.length; i++) {
-    var dx = carBodySprite.body.x - pickupObj.body.x;  //distance ship X to enemy X
-    var dy = carBodySprite.body.y - pickupObj.body.y;  //distance ship Y to enemy Y
-    var dist = Math.sqrt(dx * dx + dy * dy);     //pythagoras ^^  (get the distance to each other)
-    console.log("Dist diff= " + dist);
+    for (var i = 0 ; i < pickups.length; i++) {
+        var dx = carBodySprite.body.x - pickupObj.body.x;  //distance ship X to enemy X
+        var dy = carBodySprite.body.y - pickupObj.body.y;  //distance ship Y to enemy Y
+        var dist = Math.sqrt(dx * dx + dy * dy);     //pythagoras ^^  (get the distance to each other)
+        //console.log("Dist diff= " + dist);
 
-    if (dist < 70) {  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
-        activatePickup(pickupObj);
+        if (dist < 70) {  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
+            activatePickup(pickupObj);
+        }
     }
-   // }
 }
-
 
 function activatePickup(pickupObj) {
-    carBodySprite.body.velocity.x += 22;
+    carBodySprite.body.velocity.x += 4;
     game.world.remove(pickupObj);
 }
+
 
 function render() {
     game.debug.cameraInfo(game.camera, 32, 32);
     game.debug.spriteCoords(carBodySprite, 32, 500);
 }
+
+function getRandomX() {
+    var pickupX = 0;
+    var x;
+    var previousX = 0;
+    while (true) {
+        x = Math.floor(Math.random() * 8000) + 300;
+        delta = previousX - x;
+        if (x > 250 & x < 7000 & Math.abs(delta) > 100) {
+            pickupX = x;
+            break;
+        }
+    }
+    return pickupX;
+}
+
+function getRandomY() {
+    var pickupY = 0;
+    var y;
+    var previousX = 0;
+    while (true) {
+        y = Math.floor(Math.random() * 300) + 200;
+        if (y > 250 & y < 300) {
+            pickupY = y;
+            break;
+        }
+    }
+    return pickupY;
+}
+
