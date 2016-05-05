@@ -18,14 +18,16 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="images\arka_lastik.png" />
     <Content Include="images\body.png" />
+    <Content Include="images\map3.png" />
+    <Content Include="images\motor_pickup.png" />
     <Content Include="images\on_lastik.png" />
     <Content Include="images\map1.png" />
     <Content Include="images\object.png" />
     <Content Include="images\smallWheel.png" />
     <Content Include="index.html" />
     <Content Include="phaser.js" />
+    <Content Include="Screens\Deneme.js" />
     <Content Include="Screens\ScreenManager.js" />
     <Content Include="web.config" />
   </ItemGroup>
@@ -34,6 +36,7 @@
     <Content Include="object.json" />
     <Content Include="road2.json" />
     <Content Include="jeepCol.json" />
+    <Content Include="map3.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -41,6 +44,9 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
     <Content Include="wheelCol.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="fonts\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
