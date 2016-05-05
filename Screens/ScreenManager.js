@@ -15,6 +15,7 @@ function preload() {
     game.load.image('carbody', 'images/body.png');
     game.load.image('wheel', 'images/smallWheelv2.png');
     game.load.image('motor_pickup', 'images/motor_pickup.png');
+    game.load.image('vision_pickup', 'images/vision_pickup.png');
 
     // load the physics data json
     game.load.physics('physicsData', 'road.json');
@@ -29,13 +30,15 @@ var carBodySprite;
 var wheelFrontSprite;
 var wheelBackSprite;
 var cursors;
-var motor_pickup;
+var randPickup;
 var textStyle;
 var text;
+
 var pickups;
+var randPickupsArr = ["motor_pickup", "vision_pickup"];
+var addedPickups = [];
 var pickupCount = 5;
 
-var previousXArr = [0, 0, 0, 0, 0];
 
 function create() {
 
@@ -54,18 +57,18 @@ function create() {
 
     game.physics.p2.updateBoundsCollisionGroup();
 
+    console.log("----PICKUP POSITIONS----");
     pickups = game.add.group();
     for (var i = 0; i < pickupCount; i++) {
         var pickupX = getRandomX();
         var pickupY = getRandomY();
-
-        console.log("Random X: " + pickupX + " Random Y: " + pickupY, i);
-        motor_pickup = pickups.create(pickupX, 300, 'motor_pickup');
-        game.physics.p2.enable(motor_pickup);
-        motor_pickup.body.static = true;
+        var myRandomPickup = randPickupsArr[getRandomInt(0, 1)];
+        addedPickups[i] = myRandomPickup;
+        console.log("Random X: " + pickupX + " Random Y: " + pickupY + " Created: " + myRandomPickup, i);
+        randPickup = pickups.create(pickupX, 300, myRandomPickup);
+        game.physics.p2.enable(randPickup);
+        randPickup.body.static = true;
     }
-    console.log(previousXArr[0] + " " + previousXArr[1] + " " + previousXArr[2] + " " + previousXArr[3]);
-
 
     polygonCollisionSprite = game.add.sprite(1600, 320, 'map3');
     game.physics.p2.enable(polygonCollisionSprite, false);
@@ -169,39 +172,41 @@ function update() {
     }
 }
 
-function checkOverlapManually(pickupObj) {
-    for (var i = 0 ; i < pickups.length; i++) {
-        var dx = carBodySprite.body.x - pickupObj.body.x;  //distance ship X to enemy X
-        var dy = carBodySprite.body.y - pickupObj.body.y;  //distance ship Y to enemy Y
-        var dist = Math.sqrt(dx * dx + dy * dy);     //pythagoras ^^  (get the distance to each other)
-        //console.log("Dist diff= " + dist);
-
-        if (dist < 70) {  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
-            activatePickup(pickupObj);
-        }
-    }
-}
-
-function activatePickup(pickupObj) {
-    carBodySprite.body.velocity.x += 4;
-    game.world.remove(pickupObj);
-}
-
-
 function render() {
     game.debug.cameraInfo(game.camera, 32, 32);
     game.debug.spriteCoords(carBodySprite, 32, 500);
 }
+
+function checkOverlapManually(pickupObj) {
+    var i = 0;
+    for (i = 0 ; i < pickups.length; i++) {
+        var dx = carBodySprite.body.x - pickupObj.body.x;
+        var dy = carBodySprite.body.y - pickupObj.body.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 70) {
+            activatePickup(pickupObj, i);
+            break;
+        }
+    }
+}
+
+function activatePickup(pickupObj ,i) {
+    carBodySprite.body.velocity.x += 4;
+    console.log("Picked Up: " + addedPickups[i], i);
+    game.world.remove(pickupObj);
+}
+
 
 function getRandomX() {
     var pickupX = 0;
     var x;
     var previousX = 0;
     while (true) {
-        x = Math.floor(Math.random() * 8000) + 300;
+        x = getRandomInt(300, 8000);
         delta = previousX - x;
-        if (x > 250 & x < 7000 & Math.abs(delta) > 100) {
-            pickupX = x;
+        if (x > 250 & x < 7000 & Math.abs(delta) > 1000) {
+            pickupX = x-500;
             break;
         }
     }
@@ -213,12 +218,16 @@ function getRandomY() {
     var y;
     var previousX = 0;
     while (true) {
-        y = Math.floor(Math.random() * 300) + 200;
+        y = getRandomInt(200, 300);
         if (y > 250 & y < 300) {
             pickupY = y;
             break;
         }
     }
     return pickupY;
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 

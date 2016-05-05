@@ -25,6 +25,7 @@
     <Content Include="images\map1.png" />
     <Content Include="images\object.png" />
     <Content Include="images\smallWheel.png" />
+    <Content Include="images\vision_pickup.png" />
     <Content Include="index.html" />
     <Content Include="phaser.js" />
     <Content Include="Screens\Deneme.js" />
