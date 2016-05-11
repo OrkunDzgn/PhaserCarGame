@@ -85,7 +85,7 @@ function create() {
         randPickup.body.static = true;
     }
 
-    polygonCollisionSprite = game.add.sprite(1600, 320, 'map3');
+    polygonCollisionSprite = game.add.sprite(4500, 320, 'map3');
     game.physics.p2.enable(polygonCollisionSprite, false);
     carBodySprite = game.add.sprite(100, 350, 'carbody');
     wheelFrontSprite = game.add.sprite(150, 350, 'wheel');
