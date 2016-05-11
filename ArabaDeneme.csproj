@@ -18,6 +18,7 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="images\aerial_logo.png" />
     <Content Include="images\body.png" />
     <Content Include="images\map3.png" />
     <Content Include="images\motor_pickup.png" />

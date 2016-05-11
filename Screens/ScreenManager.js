@@ -12,10 +12,12 @@ function preload() {
     game.load.image('road1', 'images/map1.png');
     game.load.image('road2', 'images/map2.png');
     game.load.image('map3', 'images/map3.png');
-    game.load.image('carbody', 'images/body.png');
+    game.load.image('carbody', 'images/body_new.png');
     game.load.image('wheel', 'images/smallWheelv2.png');
     game.load.image('motor_pickup', 'images/motor_pickup.png');
     game.load.image('vision_pickup', 'images/vision_pickup.png');
+    game.load.image('aerial_logo', 'images/aerial_logo.png');
+    game.load.image('background', 'images/background.jpg');
 
     // load the physics data json
     game.load.physics('physicsData', 'road.json');
@@ -41,6 +43,19 @@ var pickupCount = 5;
 
 
 function create() {
+
+    var bg = game.add.sprite(game.world.centerX, game.world.centerY, 'background');
+    bg.anchor.setTo(0.5, 0.5);
+    bg.fixedToCamera = true;
+
+    text = game.add.text(330, 108, "Aerial Points: 0", {
+        font: "20px Arial",
+        fill: "#ffffff",
+        align: "right"
+    });
+    text.anchor.setTo(2, 3);
+    text.fixedToCamera = true;
+    
 
     maxSpeed = 850;
     //game.stage.backgroundColor = backgroundColor;
@@ -75,6 +90,9 @@ function create() {
     carBodySprite = game.add.sprite(100, 350, 'carbody');
     wheelFrontSprite = game.add.sprite(150, 350, 'wheel');
     wheelBackSprite = game.add.sprite(150, 350, 'wheel');
+
+    var aerial = game.add.sprite(10, 0, 'aerial_logo');
+    aerial.fixedToCamera = true;
 
 
     //wheelBackSprite.body.restitution = 0;
@@ -144,10 +162,16 @@ function create() {
 }
 
 
-
+var i = 0;
 function update() {
     //console.log("carBody X: " + carBodySprite.body.x + "pickup X: " + motor_pickup.x);
     //console.log("carBody X: " + carBodySprite.body.x + "carBody Y: " + carBodySprite.body.y);
+
+    //if(carBodySprite.body.y < 250){ 
+        i++;
+        text.text = "Aerial Points: " + i;
+
+    //}
 
     pickups.forEachAlive(checkOverlapManually, this);
 
@@ -192,9 +216,9 @@ function checkOverlapManually(pickupObj) {
 }
 
 function activatePickup(pickupObj ,i) {
-    carBodySprite.body.velocity.x += 4;
+    carBodySprite.body.velocity.x += 100;
     console.log("Picked Up: " + addedPickups[i], i);
-    game.world.remove(pickupObj);
+    pickupObj.kill();
 }
 
 
